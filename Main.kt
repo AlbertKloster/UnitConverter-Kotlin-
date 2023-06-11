@@ -1,11 +1,16 @@
 package converter
 
 fun main() {
-    println("""
-        145 centimeters is 1.45 meters
-        2 miles is 3.2187 kilometers
-        5.5 inches is 139.7 millimeters
-        12 degrees Celsius is 53.6 degrees Fahrenheit
-        3 pounds is 1.360776 kilograms
-    """.trimIndent())
+    val converter = Converter()
+    val parser = Parser()
+    print("Enter a number and a measure: ")
+    try {
+        val input = parser.parse(readln())
+        val query = Measure(input.number, if (input.number == 1) Units.getUnit(input.unit.singular) else Units.getUnit(input.unit.plural))
+        val response = converter.convertToMeter(input)
+        println("${query.number} ${query.unit.name.lowercase()} is ${response.number} ${response.unit.name.lowercase()}")
+    } catch (e: RuntimeException) {
+        println(e.message)
+    }
+
 }
