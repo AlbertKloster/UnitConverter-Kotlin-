@@ -1,10 +1,9 @@
 package converter
 
 class Converter {
-    fun convertToMeter(input: Measure): Measure {
-        val number = input.number * input.unit.coefficient
-        val unit = if (number == 1) Units.METER else Units.METERS
-        return Measure(number, unit)
+    fun convertToMeter(request: Measure): Measure {
+        val number = request.number * request.unit.coefficient
+        return Measure(number, Units.M)
     }
 
 }

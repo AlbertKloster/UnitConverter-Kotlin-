@@ -1,3 +1,3 @@
 package converter
 
-class Measure(val number: Int, val unit: Units)
+class Measure(val number: Double, val unit: Units)
