@@ -2,17 +2,17 @@ package converter
 
 class Converter {
     fun convertFromUnitToUnit(request: Measure, unit: Units): Measure {
-        val meter = convertToMeter(request)
-        return convertFromMeterToUnit(meter, unit)
+        val meter = convertToBaseUnit(request)
+        return convertFromBaseUnitToUnit(meter, unit)
     }
 
-    private fun convertToMeter(request: Measure): Measure {
-        val number = request.number * request.unit.coefficient
+    private fun convertToBaseUnit(request: Measure): Measure {
+        val number = (request.number + request.unit.offset) * request.unit.coefficient
         return Measure(number, Units.M)
     }
 
-    private fun convertFromMeterToUnit(request: Measure, unit: Units): Measure {
-        val number = request.number / unit.coefficient
+    private fun convertFromBaseUnitToUnit(request: Measure, unit: Units): Measure {
+        val number = request.number / unit.coefficient - unit.offset
         return Measure(number, unit)
     }
 }
